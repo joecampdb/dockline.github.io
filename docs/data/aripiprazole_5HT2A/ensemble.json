@@ -1,0 +1,59 @@
+{
+  "confidence_scores": [
+    {
+      "rank": 1,
+      "confidence": -2.22,
+      "filename": "rank1_confidence-2.22.sdf"
+    },
+    {
+      "rank": 2,
+      "confidence": -2.33,
+      "filename": "rank2_confidence-2.33.sdf"
+    },
+    {
+      "rank": 3,
+      "confidence": -2.4,
+      "filename": "rank3_confidence-2.40.sdf"
+    },
+    {
+      "rank": 4,
+      "confidence": -2.57,
+      "filename": "rank4_confidence-2.57.sdf"
+    },
+    {
+      "rank": 5,
+      "confidence": -2.88,
+      "filename": "rank5_confidence-2.88.sdf"
+    },
+    {
+      "rank": 6,
+      "confidence": -3.08,
+      "filename": "rank6_confidence-3.08.sdf"
+    },
+    {
+      "rank": 7,
+      "confidence": -3.12,
+      "filename": "rank7_confidence-3.12.sdf"
+    },
+    {
+      "rank": 8,
+      "confidence": -3.59,
+      "filename": "rank8_confidence-3.59.sdf"
+    },
+    {
+      "rank": 9,
+      "confidence": -3.7,
+      "filename": "rank9_confidence-3.70.sdf"
+    },
+    {
+      "rank": 10,
+      "confidence": -3.95,
+      "filename": "rank10_confidence-3.95.sdf"
+    }
+  ],
+  "pairwise_rmsd": {
+    "mean": 2.49,
+    "min": 0.52,
+    "max": 4.83
+  }
+}

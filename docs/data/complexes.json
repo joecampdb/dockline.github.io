@@ -1,0 +1,20 @@
+[
+  {
+    "name": "aripiprazole_5HT1A",
+    "label": "5-HT1A Receptor (7E2Z)",
+    "pdb_id": "7E2Z",
+    "num_poses": 10
+  },
+  {
+    "name": "aripiprazole_5HT2A",
+    "label": "5-HT2A Receptor (7VOE)",
+    "pdb_id": "7VOE",
+    "num_poses": 10
+  },
+  {
+    "name": "aripiprazole_DRD2",
+    "label": "D2 Receptor DRD2 (6CM4)",
+    "pdb_id": "6CM4",
+    "num_poses": 10
+  }
+]

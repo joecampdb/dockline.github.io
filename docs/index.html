@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dockline - Interactive Molecular Docking Viewer</title>
+  <meta name="description" content="Interactive visualization of DiffDock molecular docking results for aripiprazole binding to serotonin and dopamine receptors.">
+
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-bezier2"></i> Dockline
+        <span class="badge bg-info ms-2">Demo</span>
+      </a>
+      <div class="d-flex gap-2">
+        <a href="https://github.com/dockline/dockline.github.io" class="btn btn-outline-light btn-sm" target="_blank">
+          <i class="bi bi-github"></i> GitHub
+        </a>
+        <button class="btn btn-outline-light btn-sm" id="btnComparison" data-bs-toggle="modal" data-bs-target="#comparisonModal">
+          <i class="bi bi-table"></i> Comparison
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Demo notice -->
+  <div class="alert alert-info alert-dismissible fade show m-3 mb-0" role="alert">
+    <i class="bi bi-info-circle"></i>
+    <strong>Static Demo:</strong> This is a pre-computed demo showing aripiprazole docked to three neuroreceptors.
+    For live docking, <a href="https://github.com/dockline/dockline.github.io" class="alert-link">clone the repository</a> and run locally.
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+
+  <!-- Main content -->
+  <div class="container-fluid mt-3">
+    <div class="row g-3">
+
+      <!-- Left sidebar -->
+      <div class="col-md-4 col-lg-3">
+
+        <!-- Browse results -->
+        <div class="card mb-3 border-success">
+          <div class="card-header bg-success text-white">
+            <i class="bi bi-collection"></i> Browse Results
+          </div>
+          <div class="card-body">
+            <select id="complexSelect" class="form-select form-select-sm mb-2">
+              <option value="">-- Select a complex --</option>
+            </select>
+            <label class="form-label small mb-0">Pose Rank: <strong id="rankLabel">1</strong></label>
+            <input type="range" class="form-range" id="rankSlider" min="1" max="10" value="1">
+          </div>
+        </div>
+
+        <!-- Metrics cards -->
+        <div class="card mb-3" id="metricsCard" style="display:none">
+          <div class="card-header"><i class="bi bi-bar-chart"></i> Pose Metrics</div>
+          <div class="card-body" id="metricsPanel"></div>
+        </div>
+
+        <!-- Confidence chart -->
+        <div class="card mb-3" id="chartCard" style="display:none">
+          <div class="card-header"><i class="bi bi-graph-up"></i> Confidence Distribution</div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="confidenceChart"></canvas>
+            </div>
+            <div id="diversitySummary" class="mt-2 small text-muted"></div>
+          </div>
+        </div>
+
+        <!-- About -->
+        <div class="card mb-3">
+          <div class="card-header"><i class="bi bi-info-circle"></i> About</div>
+          <div class="card-body small">
+            <p class="mb-2">
+              <strong>Aripiprazole</strong> is an atypical antipsychotic that acts as a partial agonist at D₂ and 5-HT₁ₐ receptors and an antagonist at 5-HT₂ₐ receptors.
+            </p>
+            <p class="mb-0">
+              Docking performed with <a href="https://github.com/gcorso/DiffDock" target="_blank">DiffDock</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main viewer area -->
+      <div class="col-md-8 col-lg-9">
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span><i class="bi bi-box"></i> 3D Viewer</span>
+            <div class="btn-group btn-group-sm" id="viewerControls" style="display:none">
+              <button class="btn btn-outline-secondary" id="btnSurface" title="Toggle surface">
+                <i class="bi bi-circle"></i> Surface
+              </button>
+              <button class="btn btn-outline-secondary" id="btnLabels" title="Toggle residue labels">
+                <i class="bi bi-fonts"></i> Labels
+              </button>
+              <button class="btn btn-outline-secondary" id="btnReset" title="Reset view">
+                <i class="bi bi-arrow-counterclockwise"></i> Reset
+              </button>
+            </div>
+          </div>
+          <div class="card-body p-0 position-relative">
+            <!-- Welcome overlay (shown when no complex selected) -->
+            <div id="welcomeOverlay" class="welcome-overlay">
+              <div class="text-center">
+                <i class="bi bi-bezier2 display-1 text-muted"></i>
+                <h4 class="mt-3">Welcome to Dockline</h4>
+                <p class="text-muted">Select a complex from the dropdown to view docking poses.</p>
+              </div>
+            </div>
+            <!-- 3Dmol viewer -->
+            <div id="viewer3d"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Comparison modal -->
+  <div class="modal fade" id="comparisonModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-table"></i> Cross-Complex Comparison</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="comparisonTableWrap">
+            <p class="text-muted">Loading comparison data...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3Dmol.js -->
+  <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+  <!-- Chart.js 4 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- App JS (static version) -->
+  <script src="js/app.js"></script>
+</body>
+</html>

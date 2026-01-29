@@ -1,0 +1,34 @@
+# Dockline Docker Compose
+#
+# Start with GPU support:
+#   docker-compose up --build
+#
+# Start in background:
+#   docker-compose up -d --build
+
+version: '3.8'
+
+services:
+  dockline:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      # Persist results and uploads
+      - ./results:/app/results
+      - ./uploads:/app/uploads
+      - ./pdb_clean:/app/pdb_clean
+      - ./pdb_raw:/app/pdb_raw
+      # Mount DiffDock models (if pre-downloaded)
+      - ./DiffDock/workdir:/app/DiffDock/workdir
+    environment:
+      - FLASK_ENV=production
+      - KMP_DUPLICATE_LIB_OK=TRUE
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped

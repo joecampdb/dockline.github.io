@@ -1,0 +1,68 @@
+# Dockline + DiffDock Conda Environment
+#
+# Create environment:
+#   conda env create -f environment.yml
+#
+# Activate:
+#   conda activate diffdock
+#
+# Note: This configuration is for CUDA 12.1 (NVIDIA RTX 30/40 series)
+# For different CUDA versions, adjust the pytorch-cuda and PyG wheel URLs
+
+name: diffdock
+
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python
+  - python=3.10
+
+  # PyTorch with CUDA 12.1
+  - pytorch=2.1.2
+  - pytorch-cuda=12.1
+  - torchvision
+  - torchaudio
+
+  # Scientific computing
+  - numpy<2.0
+  - scipy
+  - pandas
+
+  # Molecular tools
+  - rdkit
+  - biopython
+
+  # Web framework
+  - flask
+
+  # Visualization (for standalone scripts)
+  - py3dmol
+
+  # Utilities
+  - pyyaml
+  - tqdm
+  - requests
+
+  # Pip dependencies (not available via conda)
+  - pip
+  - pip:
+      # PyTorch Geometric (use appropriate CUDA version)
+      - torch-scatter -f https://data.pyg.org/whl/torch-2.1.2+cu121.html
+      - torch-sparse -f https://data.pyg.org/whl/torch-2.1.2+cu121.html
+      - torch-cluster -f https://data.pyg.org/whl/torch-2.1.2+cu121.html
+      - torch-geometric
+
+      # DiffDock dependencies
+      - fair-esm
+      - e3nn
+      - pytorch-lightning
+      - biopandas
+      - posebusters
+      - spyrmsd
+
+      # ChEMBL access (optional, for fetching compounds)
+      - chembl_webresource_client

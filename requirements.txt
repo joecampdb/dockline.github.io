@@ -1,0 +1,18 @@
+# Dockline Web Application Dependencies
+# Install with: pip install -r requirements.txt
+
+# Web framework
+flask>=2.3.0
+
+# Molecular handling
+rdkit>=2023.9.1
+
+# Protein structure parsing
+biopython>=1.81
+
+# Numerical computation
+numpy<2.0  # NumPy 1.x required for PyTorch compatibility
+scipy>=1.11.0
+
+# Note: DiffDock has additional dependencies (PyTorch, PyG, ESM, etc.)
+# See environment.yml for complete Conda environment setup

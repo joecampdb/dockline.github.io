@@ -1,0 +1,110 @@
+/* Dockline – custom styles */
+
+body {
+  background: #f4f6f9;
+}
+
+/* 3Dmol viewer – position: relative is critical for mouse event capture */
+#viewer3d {
+  width: 100%;
+  height: 70vh;
+  min-height: 400px;
+  position: relative;
+  background: #fff;
+}
+
+/* Welcome overlay */
+.welcome-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  z-index: 10;
+}
+.welcome-overlay.hidden {
+  display: none;
+}
+
+/* Metric badges */
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #eee;
+}
+.metric-row:last-child {
+  border-bottom: none;
+}
+.metric-label {
+  font-size: 0.85rem;
+  color: #555;
+}
+.metric-value {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* RMSD color coding */
+.rmsd-green  { color: #198754; }
+.rmsd-yellow { color: #ffc107; }
+.rmsd-red    { color: #dc3545; }
+
+/* Contact list */
+.contact-list {
+  font-size: 0.78rem;
+  color: #666;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.contact-list span {
+  display: inline-block;
+  background: #e9ecef;
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin: 1px 2px;
+}
+
+/* Chart container – fixed height prevents Chart.js resize loop */
+.chart-container {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+#confidenceChart {
+  cursor: pointer;
+}
+
+/* Job progress toast card */
+.job-toast {
+  min-width: 280px;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  margin-top: 8px;
+}
+.job-toast .job-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.job-toast .progress {
+  height: 8px;
+}
+
+/* Comparison table */
+#comparisonTableWrap table {
+  font-size: 0.85rem;
+}
+#comparisonTableWrap th {
+  white-space: nowrap;
+}
+
+/* Sidebar card spacing */
+.card-header {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
