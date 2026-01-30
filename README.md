@@ -8,7 +8,7 @@ A web-based GUI for [DiffDock](https://github.com/gcorso/DiffDock) molecular doc
 
 ## Live Demo
 
-**[View the interactive demo](https://dockline.github.io)** - Browse pre-computed docking results for aripiprazole binding to serotonin and dopamine receptors.
+**[View the interactive demo](https://joecampdb.github.io/dockline.github.io)** - Browse pre-computed docking results for aripiprazole binding to serotonin and dopamine receptors.
 
 ## Features
 
