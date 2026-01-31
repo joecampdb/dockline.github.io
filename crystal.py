@@ -2,13 +2,16 @@
 Extract crystal-structure ligands from raw PDB files for RMSD comparison.
 
 Maps known DiffDock complex names to the PDB entry, chain, and residue ID
-of the co-crystallised aripiprazole (residue name 9SC).  The extracted
-HETATM block is converted to an RDKit Mol with correct bond orders using
-the aripiprazole SMILES as a template.
+of the co-crystallised ligand. The extracted HETATM block is converted to
+an RDKit Mol with correct bond orders using the ligand SMILES as a template.
 
-Only 5-HT1A (7E2Z) and 5-HT2A (7VOE) have a co-crystallised aripiprazole;
-DRD2 (6CM4) does not, so RMSD-to-crystal is unavailable for that target.
+Supported ligands:
+- Caffeine (CFF) in 5MZP (A2A receptor)
+- Imatinib (STI) in 2HYY (c-Abl) and 1T46 (c-KIT)
+- Quercetin (QUE) in 1E8W (PI3K) and 2O3P (Pim1)
 """
+
+from __future__ import annotations
 
 import os
 from rdkit import Chem
@@ -17,12 +20,27 @@ from rdkit.Chem import AllChem
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_PDB_DIR = os.path.join(BASE_DIR, "pdb_raw")
 
-ARIPIPRAZOLE_SMILES = "O=C1CCc2ccc(OCCCCN3CCN(c4cccc(Cl)c4Cl)CC3)cc2N1"
+# Ligand SMILES for bond order assignment
+LIGAND_SMILES = {
+    "caffeine": "Cn1cnc2c1c(=O)n(c(=O)n2C)C",
+    "imatinib": "Cc1ccc(NC(=O)c2ccc(CN3CCN(C)CC3)cc2)cc1Nc4nccc(n4)c5cccnc5",
+    "quercetin": "O=c1c(O)c(-c2ccc(O)c(O)c2)oc2cc(O)cc(O)c12",
+}
 
-# Complex name -> (pdb_filename, chain_id, residue_name)
+# Complex name -> (pdb_filename, chain_id, residue_name, ligand_key)
 CRYSTAL_MAP = {
-    "aripiprazole_5HT1A": ("7E2Z.pdb", "R", "9SC"),
-    "aripiprazole_5HT2A": ("7VOE.pdb", "A", "9SC"),
+    # Caffeine - A2A has caffeine co-crystallized
+    "caffeine_A2A": ("5MZP.pdb", "A", "CFF", "caffeine"),
+    # Caffeine - A1 does not have caffeine in 5N2S (has PSB36)
+    # "caffeine_A1": None,
+
+    # Imatinib
+    "imatinib_Abl": ("2HYY.pdb", "A", "STI", "imatinib"),
+    "imatinib_cKIT": ("1T46.pdb", "A", "STI", "imatinib"),
+
+    # Quercetin
+    "quercetin_PI3K": ("1E8W.pdb", "A", "QUE", "quercetin"),
+    "quercetin_Pim1": ("2O3P.pdb", "A", "QUE", "quercetin"),
 }
 
 _cache: dict = {}
@@ -61,9 +79,14 @@ def get_crystal_mol(complex_name: str):
         _cache[complex_name] = None
         return None
 
-    pdb_file, chain_id, resname = entry
+    pdb_file, chain_id, resname, ligand_key = entry
     pdb_path = os.path.join(RAW_PDB_DIR, pdb_file)
     if not os.path.exists(pdb_path):
+        _cache[complex_name] = None
+        return None
+
+    smiles = LIGAND_SMILES.get(ligand_key)
+    if smiles is None:
         _cache[complex_name] = None
         return None
 
@@ -73,7 +96,7 @@ def get_crystal_mol(complex_name: str):
         if raw_mol is None:
             raise ValueError("MolFromPDBBlock returned None")
 
-        template = Chem.MolFromSmiles(ARIPIPRAZOLE_SMILES)
+        template = Chem.MolFromSmiles(smiles)
         mol = AllChem.AssignBondOrdersFromTemplate(template, raw_mol)
         _cache[complex_name] = mol
         return mol

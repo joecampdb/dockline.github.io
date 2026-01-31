@@ -8,7 +8,15 @@ A web-based GUI for [DiffDock](https://github.com/gcorso/DiffDock) molecular doc
 
 ## Live Demo
 
-**[View the interactive demo](https://joecampdb.github.io/dockline.github.io)** - Browse pre-computed docking results for aripiprazole binding to serotonin and dopamine receptors.
+**[View the interactive demo](https://joecampdb.github.io/Dockline)** - Browse pre-computed docking results with color-coded ligands.
+
+### Featured Ligands
+
+| Ligand | Color | Targets |
+|--------|-------|---------|
+| Caffeine | Blue | Adenosine A2A, A1 receptors |
+| Imatinib | Orange | c-Abl, c-KIT kinases |
+| Quercetin | Green | PI3K, Pim1 kinases |
 
 ## Features
 
@@ -35,8 +43,8 @@ A web-based GUI for [DiffDock](https://github.com/gcorso/DiffDock) molecular doc
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/dockline.git
-cd dockline
+git clone https://github.com/joecampdb/Dockline.git
+cd Dockline
 ```
 
 ### 2. Clone DiffDock

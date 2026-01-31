@@ -26,22 +26,52 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RESULTS_DIR = os.path.join(BASE_DIR, "results")
 CLEAN_PDB_DIR = os.path.join(BASE_DIR, "pdb_clean")
 
-# Known complexes: complex_name -> {label, pdb_id, pdb_file}
+# Known complexes: complex_name -> {label, pdb_id, pdb_file, ligand, color}
 KNOWN_COMPLEXES = {
-    "aripiprazole_5HT1A": {
-        "label": "5-HT1A Receptor (7E2Z)",
-        "pdb_id": "7E2Z",
-        "pdb_file": "5HT1A_7E2Z_clean.pdb",
+    # Caffeine targets (Blue)
+    "caffeine_A2A": {
+        "label": "Adenosine A2A (5MZP)",
+        "pdb_id": "5MZP",
+        "pdb_file": "caffeine_A2A_clean.pdb",
+        "ligand": "caffeine",
+        "color": "#3b82f6",
     },
-    "aripiprazole_5HT2A": {
-        "label": "5-HT2A Receptor (7VOE)",
-        "pdb_id": "7VOE",
-        "pdb_file": "5HT2A_7VOE_clean.pdb",
+    "caffeine_A1": {
+        "label": "Adenosine A1 (5N2S)",
+        "pdb_id": "5N2S",
+        "pdb_file": "caffeine_A1_clean.pdb",
+        "ligand": "caffeine",
+        "color": "#3b82f6",
     },
-    "aripiprazole_DRD2": {
-        "label": "D2 Receptor DRD2 (6CM4)",
-        "pdb_id": "6CM4",
-        "pdb_file": "DRD2_6CM4_clean.pdb",
+    # Imatinib targets (Orange)
+    "imatinib_Abl": {
+        "label": "c-Abl Kinase (2HYY)",
+        "pdb_id": "2HYY",
+        "pdb_file": "imatinib_Abl_clean.pdb",
+        "ligand": "imatinib",
+        "color": "#f97316",
+    },
+    "imatinib_cKIT": {
+        "label": "c-KIT Kinase (1T46)",
+        "pdb_id": "1T46",
+        "pdb_file": "imatinib_cKIT_clean.pdb",
+        "ligand": "imatinib",
+        "color": "#f97316",
+    },
+    # Quercetin targets (Green)
+    "quercetin_PI3K": {
+        "label": "PI3K gamma (1E8W)",
+        "pdb_id": "1E8W",
+        "pdb_file": "quercetin_PI3K_clean.pdb",
+        "ligand": "quercetin",
+        "color": "#22c55e",
+    },
+    "quercetin_Pim1": {
+        "label": "Pim1 Kinase (2O3P)",
+        "pdb_id": "2O3P",
+        "pdb_file": "quercetin_Pim1_clean.pdb",
+        "ligand": "quercetin",
+        "color": "#22c55e",
     },
 }
 

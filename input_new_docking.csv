@@ -1,0 +1,7 @@
+complex_name,protein_path,ligand_description,protein_sequence
+caffeine_A2A,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/pdb_clean/caffeine_A2A_clean.pdb,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/caffeine.sdf,
+caffeine_A1,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/pdb_clean/caffeine_A1_clean.pdb,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/caffeine.sdf,
+imatinib_Abl,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/pdb_clean/imatinib_Abl_clean.pdb,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/imatinib.sdf,
+imatinib_cKIT,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/pdb_clean/imatinib_cKIT_clean.pdb,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/imatinib.sdf,
+quercetin_PI3K,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/pdb_clean/quercetin_PI3K_clean.pdb,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/quercetin.sdf,
+quercetin_Pim1,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/pdb_clean/quercetin_Pim1_clean.pdb,C:/Users/ltjjp/OneDrive/Desktop/joecam/diffdock-test/quercetin.sdf,

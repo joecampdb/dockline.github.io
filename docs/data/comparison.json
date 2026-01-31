@@ -1,149 +1,30 @@
 [
   {
-    "confidence": -1.22,
-    "rmsd_to_crystal": 2.19,
-    "hbonds": [
-      {
-        "protein_residue": "THR121",
-        "protein_atom": "OG1",
-        "distance": 2.01
-      }
-    ],
-    "salt_bridges": [
-      {
-        "residue": "ASP116",
-        "distance": 3.71
-      }
-    ],
-    "hydrophobic_contacts": 17,
-    "close_contacts": [
-      "ALA203",
-      "ALA93",
-      "ASN386",
-      "ASP116",
-      "CYS109",
-      "CYS120",
-      "CYS187",
-      "ILE167",
-      "ILE189",
-      "PHE112",
-      "PHE361",
-      "SER199",
-      "THR121",
-      "TRP102",
-      "TYR390",
-      "TYR96",
-      "VAL117"
-    ],
-    "buried_surface_area": 405.0,
-    "complex_name": "aripiprazole_5HT1A",
-    "label": "5-HT1A Receptor (7E2Z)"
-  },
-  {
-    "confidence": -2.22,
-    "rmsd_to_crystal": 1.47,
-    "hbonds": [
-      {
-        "protein_residue": "ASP232",
-        "protein_atom": "OD1",
-        "distance": 3.24
-      },
-      {
-        "protein_residue": "LYS350",
-        "protein_atom": "NZ",
-        "distance": 1.55
-      },
-      {
-        "protein_residue": "LEU229",
-        "protein_atom": "O",
-        "distance": 3.35
-      },
-      {
-        "protein_residue": "ASN343",
-        "protein_atom": "OD1",
-        "distance": 3.33
-      },
-      {
-        "protein_residue": "ASN343",
-        "protein_atom": "ND2",
-        "distance": 2.84
-      }
-    ],
-    "salt_bridges": [
-      {
-        "residue": "ASP232",
-        "distance": 3.19
-      }
-    ],
-    "hydrophobic_contacts": 20,
-    "close_contacts": [
-      "ASN343",
-      "ASP155",
-      "ASP232",
-      "GLY238",
-      "LEU228",
-      "LEU229",
-      "LYS223",
-      "LYS350",
-      "PHE243",
-      "PHE339",
-      "SER159",
-      "SER239",
-      "SER242",
-      "THR160",
-      "TRP336",
-      "VAL156",
-      "VAL235"
-    ],
-    "buried_surface_area": 420.0,
-    "complex_name": "aripiprazole_5HT2A",
-    "label": "5-HT2A Receptor (7VOE)"
-  },
-  {
-    "confidence": -0.89,
+    "confidence": 0.33,
     "rmsd_to_crystal": null,
-    "hbonds": [
-      {
-        "protein_residue": "ILE184",
-        "protein_atom": "O",
-        "distance": 3.49
-      },
-      {
-        "protein_residue": "ASP114",
-        "protein_atom": "OD2",
-        "distance": 3.43
-      },
-      {
-        "protein_residue": "TYR416",
-        "protein_atom": "OH",
-        "distance": 3.46
-      }
-    ],
-    "salt_bridges": [
-      {
-        "residue": "ASP114",
-        "distance": 3.43
-      }
-    ],
-    "hydrophobic_contacts": 18,
-    "close_contacts": [
-      "ASP114",
-      "HIS393",
-      "ILE184",
-      "PHE189",
-      "PHE389",
-      "PHE390",
-      "SER193",
-      "THR412",
-      "TRP100",
-      "TRP386",
-      "TYR408",
-      "TYR416",
-      "VAL115",
-      "VAL190"
-    ],
-    "buried_surface_area": 420.0,
-    "complex_name": "aripiprazole_DRD2",
-    "label": "D2 Receptor DRD2 (6CM4)"
+    "hbonds": [],
+    "salt_bridges": [],
+    "hydrophobic_contacts": 0,
+    "close_contacts": [],
+    "buried_surface_area": 0.0,
+    "error": "Protein atoms not available",
+    "complex_name": "caffeine_A2A",
+    "label": "Adenosine A2A (5MZP)",
+    "ligand": "caffeine",
+    "color": "#3b82f6"
+  },
+  {
+    "confidence": -0.31,
+    "rmsd_to_crystal": null,
+    "hbonds": [],
+    "salt_bridges": [],
+    "hydrophobic_contacts": 0,
+    "close_contacts": [],
+    "buried_surface_area": 0.0,
+    "error": "Protein atoms not available",
+    "complex_name": "caffeine_A1",
+    "label": "Adenosine A1 (5N2S)",
+    "ligand": "caffeine",
+    "color": "#3b82f6"
   }
 ]

@@ -1,20 +1,18 @@
 [
   {
-    "name": "aripiprazole_5HT1A",
-    "label": "5-HT1A Receptor (7E2Z)",
-    "pdb_id": "7E2Z",
+    "name": "caffeine_A2A",
+    "label": "Adenosine A2A (5MZP)",
+    "pdb_id": "5MZP",
+    "ligand": "caffeine",
+    "color": "#3b82f6",
     "num_poses": 10
   },
   {
-    "name": "aripiprazole_5HT2A",
-    "label": "5-HT2A Receptor (7VOE)",
-    "pdb_id": "7VOE",
-    "num_poses": 10
-  },
-  {
-    "name": "aripiprazole_DRD2",
-    "label": "D2 Receptor DRD2 (6CM4)",
-    "pdb_id": "6CM4",
+    "name": "caffeine_A1",
+    "label": "Adenosine A1 (5N2S)",
+    "pdb_id": "5N2S",
+    "ligand": "caffeine",
+    "color": "#3b82f6",
     "num_poses": 10
   }
 ]

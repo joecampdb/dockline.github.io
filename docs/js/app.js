@@ -26,6 +26,9 @@ const dataCache = {
   comparison: null,
 };
 
+// Current complex info (includes color)
+let currentComplexInfo = null;
+
 // ---------------------------------------------------------------------------
 // Initialisation
 // ---------------------------------------------------------------------------
@@ -80,6 +83,8 @@ async function loadComplexes() {
       opt.value = c.name;
       opt.textContent = c.label;
       opt.dataset.numPoses = c.num_poses;
+      opt.dataset.ligand = c.ligand || "";
+      opt.dataset.color = c.color || "#6c757d";
       sel.appendChild(opt);
     });
   } catch (e) {
@@ -94,10 +99,13 @@ async function loadComplexes() {
 async function onComplexChange() {
   const sel = document.getElementById("complexSelect");
   const name = sel.value;
+  const badgeDiv = document.getElementById("currentLigandBadge");
+
   if (!name) {
     showWelcome();
     document.getElementById("metricsCard").style.display = "none";
     document.getElementById("chartCard").style.display = "none";
+    if (badgeDiv) badgeDiv.innerHTML = "";
     currentComplex = null;
     cachedProteinText = null;
     return;
@@ -106,9 +114,20 @@ async function onComplexChange() {
   currentComplex = name;
   cachedProteinText = null;
 
-  // Update rank slider max
+  // Update rank slider max and get ligand info
   const opt = sel.selectedOptions[0];
   const numPoses = parseInt(opt.dataset.numPoses) || 10;
+  const ligand = opt.dataset.ligand || "";
+  const color = opt.dataset.color || "#6c757d";
+
+  // Store current complex info
+  currentComplexInfo = { name, ligand, color };
+
+  // Display ligand badge
+  if (badgeDiv && ligand) {
+    badgeDiv.innerHTML = `<span class="badge" style="background-color: ${color};">${ligand}</span>`;
+  }
+
   const slider = document.getElementById("rankSlider");
   slider.max = numPoses;
   slider.value = 1;
@@ -487,9 +506,9 @@ function renderComparisonTable(rows) {
   const wrap = document.getElementById("comparisonTableWrap");
   let html = '<div class="table-responsive"><table class="table table-sm table-striped align-middle">';
   html += "<thead><tr>";
-  html += "<th>Complex</th><th>Confidence</th><th>RMSD</th>";
-  html += "<th>H-bonds</th><th>Salt Bridges</th><th>Hydro. Contacts</th>";
-  html += "<th>Buried SA</th><th>Close Residues</th>";
+  html += "<th>Ligand</th><th>Complex</th><th>Confidence</th><th>RMSD</th>";
+  html += "<th>H-bonds</th><th>Salt Bridges</th><th>Hydro.</th>";
+  html += "<th>Buried SA</th>";
   html += "</tr></thead><tbody>";
 
   rows.forEach(m => {
@@ -497,7 +516,10 @@ function renderComparisonTable(rows) {
       ? m.confidence.toFixed(2) : "N/A";
     const rmsd = m.rmsd_to_crystal !== null && m.rmsd_to_crystal !== undefined
       ? m.rmsd_to_crystal.toFixed(2) + " \u00C5" : "\u2014";
+    const ligand = m.ligand || "";
+    const color = m.color || "#6c757d";
     html += "<tr>";
+    html += `<td><span class="badge" style="background-color: ${color};">${ligand}</span></td>`;
     html += `<td class="fw-bold">${m.label}</td>`;
     html += `<td>${conf}</td>`;
     html += `<td>${rmsd}</td>`;
@@ -505,7 +527,6 @@ function renderComparisonTable(rows) {
     html += `<td>${m.salt_bridges ? m.salt_bridges.length : 0}</td>`;
     html += `<td>${m.hydrophobic_contacts || 0}</td>`;
     html += `<td>${m.buried_surface_area || 0} \u00C5\u00B2</td>`;
-    html += `<td>${m.close_contacts ? m.close_contacts.length : 0}</td>`;
     html += "</tr>";
   });
 
